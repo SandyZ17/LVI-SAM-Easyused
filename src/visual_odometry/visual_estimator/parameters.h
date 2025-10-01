@@ -4,6 +4,7 @@
 #include <ros/package.h>
 #include <eigen3/Eigen/Dense>
 #include "utility/utility.h"
+#include <pcl/kdtree/kdtree_flann.h>
 #include <opencv2/opencv.hpp>
 #include <opencv2/core/eigen.hpp>
 
@@ -19,21 +20,20 @@
 #include <pcl/point_cloud.h>
 #include <pcl/point_types.h>
 #include <pcl/range_image/range_image.h>
-#include <pcl/kdtree/kdtree_flann.h>
 #include <pcl/common/common.h>
 #include <pcl/common/transforms.h>
 #include <pcl/registration/icp.h>
 #include <pcl/io/pcd_io.h>
 #include <pcl/filters/filter.h>
 #include <pcl/filters/voxel_grid.h>
-#include <pcl/filters/crop_box.h> 
+#include <pcl/filters/crop_box.h>
 #include <pcl_conversions/pcl_conversions.h>
 
 #include <tf/LinearMath/Quaternion.h>
 #include <tf/transform_listener.h>
 #include <tf/transform_datatypes.h>
 #include <tf/transform_broadcaster.h>
- 
+
 #include <vector>
 #include <cmath>
 #include <algorithm>
@@ -54,12 +54,10 @@
 
 const int WINDOW_SIZE = 10;
 
-
 const double FOCAL_LENGTH = 460.0;
 const int NUM_OF_CAM = 1;
 const int NUM_OF_F = 1000;
 // #define UNIT_SPHERE_ERROR 1
-
 
 extern double INIT_DEPTH;
 extern double MIN_PARALLAX;
@@ -92,7 +90,7 @@ extern int ALIGN_CAMERA_LIDAR_COORDINATE;
 
 #else
 //? add: 从params_lidar.yaml中读取的参数
-extern Eigen::Matrix3d R_imu_lidar;  //; R_lidar_imu, 即IMU -> LiDAR的旋转
+extern Eigen::Matrix3d R_imu_lidar; //; R_lidar_imu, 即IMU -> LiDAR的旋转
 extern Eigen::Vector3d t_imu_lidar;
 #endif
 

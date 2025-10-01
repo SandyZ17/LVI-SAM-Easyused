@@ -3,7 +3,7 @@
 set -e
 
 # Ros build
-source "/opt/ros/melodic/setup.bash"
+source "/opt/ros/noetic/setup.bash"
 
 # Fix error related to GTSAM 
 # ref: https://github.com/borglab/gtsam/issues/380
